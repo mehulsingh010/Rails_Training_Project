@@ -1,0 +1,44 @@
+<h1>Create New Turf</h1>
+
+<div style="display: grid; justify-items: center; align-items: center;">
+  <%= form_with model: @turf, method: :post do |user_form| %>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :name ,class: "form-label"%>
+      <%= user_form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :location , class: "form-label"%>
+      <%= user_form.text_field :location, class: "form-control", placeholder: "Enter location" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :opening_time,class: "form-label" %>
+     <%= user_form.time_field :opening_time ,
+       
+      class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :close_time,class: "form-label" %>
+      <%= user_form.time_field :close_time  ,
+       
+      class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+    <%= user_form.label :status ,class: "form-label"%>
+    <%= user_form.check_box :status, class: "form-check-input" %> 
+  </div>
+  
+
+  <div class="form-group mb-3">
+  <%= user_form.label :user_id, "Assign User",class: "form-label" %>
+  <%= user_form.select :user_id, User.all.map { |u| [u.name, u.id] }, { include_blank: "Select a User" }, class: "form-control" %>
+</div>
+
+
+    <%= user_form.submit "Create User", class: "btn btn-primary" %>
+  <% end %>  
+</div>

@@ -1,0 +1,41 @@
+<h1>All Review</h1>
+
+
+<div class="mb-3">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Review_ID</th>
+      <th scope="col">User_id</th>
+      <th scope="col">Turf_id</th>
+      <th scope="col">Review</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @review.each do |review| %>
+      <tr>
+        <th scope="row"><%= review.id %></th>
+        
+        <td><%= review.user.name.humanize %></td>
+        <td><%= review.turf.name.humanize %></td>
+        <td><%= review.review %></td>
+        <td><%= review.role.name.humanize %></td>
+        <td><%= link_to  user_path(user.id), class: 'btn btn-light' do %>view <% end %> </td>
+        <td> <%= link_to edit_user_path(user.id), class: 'btn btn-primary' do  %>edit  <% end %></td>
+        <td> <%= link_to  user_path(user.id),method: :delete, class: 'btn btn-danger' do  %>delete<% end %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<%= link_to new_user_path, class: 'btn btn-info' do %>
+  Add New User
+<% end %>
+
+
+
+
+ 

@@ -1,60 +1,62 @@
 class UsersController < ApplicationController
 
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
+
     # index refer to file in view/users name that is the root of users
     def index
-        @uers = User.all
+        @users = User.all
     end
 
-     # GET /users/new
+    # GET /users/new
     def new
         @user = User.new
     end
 
-    # show means the specific users 
-  #GET /users/1
+    # show means the specific users
+    # GET /users/1
     def show
-        @user = User.find(params[:id])
+        
     end
 
-    def edit 
-        @user = User.find(params[:id])
+    def edit
+        # @user = User.find(params[:id])
     end
 
-    #post /users creating new users
-    def create 
-        @user = User.new(use_params)
-        respond_to do |format|
-            if @user.save 
-                format.html {redirect_to @user, notice: "User was successfully created."}
-            else
-                format.html {render :new}
-            end 
-        end
-    end    
+    # post /users creating new users
+    def create
+      @user = User.new(user_params)
+         if @user.save
+           redirect_to @user, notice: "User was successfully created."
+          else
+            render :new ,status: :unprocessable_entity,alert: "Error While Creating New User"
+         end
+    end
 
-    # update method 
+    # update method
     # PUT/PATCH users/1
     def update
-        respond_to do |format|
-          if @user.update(user_params)
-            format.html {redirect_to @user, notice: "user was succesfully updated"}
-          else  
-            format.html { render :edit }
-          end
+      if @user.update(user_params)
+        redirect_to users_path, notice: "User was successfully updated"
+      else
+        render :edit
+      end
+    end
+
+    # delete user
+    def destroy
+
+        if @user.destroy
+          redirect_to users_path, notice: "User was successfully deleted"
+        else
+          redirect_to users_path, alert: "There was problemn deletign the user"
         end
     end
 
-    #delete user
-    def destroy
-        @user = User.find(params[:id]) 
-        if @user.destroy
-          redirect_to user_path, notice: "User was successfully deleted"
-        else
-          redirect_to user_path, alert: "There was problemn deletign the user"
-        end
-    end
+    def set_user
+        @user = User.find(params[:id])
+      end
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :phone_number, :role_id )
+        params.require(:user).permit(:name, :email, :password,:password_confirmation ,:phone_number, :role_id)
     end
 end

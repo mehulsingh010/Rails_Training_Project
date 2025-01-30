@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "home/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,7 +12,11 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   #routes for users
-  resources :users, only: [:index, :show, :create]
+  resources :users, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+
+  resources :reviews, only: [:index, :new, :show]
+
+  resources :turves, only: [:index, :new, :create, :edit, :update, :destroy, :show]
 
   # Defines the root path route ("/")
   # root "posts#index"
