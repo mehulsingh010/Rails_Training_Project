@@ -1,6 +1,7 @@
 class TurvesController < ApplicationController
+    # before_action :authenticate_user!
 
-    before_action :set_user , only: [:show, :edit, :update, :destroy]
+    before_action :set_turf , only: [:show, :edit, :update, :destroy]
 
     def index
         @turves  = Turf.all
@@ -9,7 +10,7 @@ class TurvesController < ApplicationController
     def new
         @turf = Turf.new
     end
-
+    
     def edit
     end
 
@@ -41,7 +42,7 @@ class TurvesController < ApplicationController
         end
     end
 
-    def set_user
+    def set_turf
         @turf = Turf.find(params[:id])
     end
 

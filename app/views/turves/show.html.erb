@@ -41,6 +41,55 @@
       <h6 class="<%= @turf.status? ? 'text-success' : 'text-danger' %>">
       Status: <%= @turf.status? ? 'Open' : 'Closed' %>
       </h6>
+
+
+<table>
+<h4>All Available Slots </h4>
+<thead>
+  <tr>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+  <% @turf.time_slots.each do |time_slot| %>
+    <% if time_slot.status == "available" %>
+      <tr>
+        <td><%= time_slot.start_time.strftime('%I:%M %p') %></td>
+        <td><%= time_slot.end_time.strftime('%I:%M %p') %></td>
+        <td>
+            <%= time_slot.status %></td>
+        </tr>
+    <%end %>
+  <% end %>
+</tbody>
+</table>
+
+<table>
+<h4>All Booked Slots </h4>
+<thead>
+  <tr>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+  <% @turf.time_slots.each do |time_slot| %>
+    <% if time_slot.status == "booked" %>
+    <tr>
+        <td><%= time_slot.start_time.strftime('%I:%M %p') %></td>
+        <td><%= time_slot.end_time.strftime('%I:%M %p') %></td>
+        <td>
+          <%= time_slot.status %></td>
+    </tr>
+    <%end %>
+  <% end %>
+</tbody>
+</table>
+
+<%= link_to 'Back to Turfs', turves_path %>
       <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>

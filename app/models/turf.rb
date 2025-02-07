@@ -1,7 +1,7 @@
 class Turf < ApplicationRecord
     has_many :reviews
     has_many :time_slots
-    belongs_to :user
+    belongs_to :user 
     has_many :bookings
   
 

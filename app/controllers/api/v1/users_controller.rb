@@ -1,28 +1,47 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy ]
+  skip_before_action :authenticate_request, only: [:create]
+  before_action :set_user, only: [:show,  :update ,:destroy]
   # all user
     def index
         @users =User.all
-        render json: @users
+        render json: @users,status: 200
     end
 
     # single user
     def show
-      @user = User.find(params[:id])
-      render json: @user
+      if @user 
+        render json: @user,status: 200
+      else 
+        render json: {error: "User Not Found."}
+      end
     end
     # post
     def create
       @user = User.new(user_params)
         if @user.save
+          # debugger
           render json: { status: "Success", message: "User created", data: @user }, status: :created
         else
-          render json: { status: "Error", message: "User not created", errors: @user.errors.full_messages }, status: :unprocessable_entity
+          render json: { status: "Error", message: "User not created", error: @user.errors.full_messages }, status: :unprocessable_entity
         end
     end
 
+    def update 
+      unless @user.update(user_params)
+        render json: {errors: @user.errors.full_message},
+               status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @user.destroy 
+    end
+
+    private
+
       def user_params
-        params.require(:user).permit(:name, :email, :phone_number, :password, :role_id)
+        # debugger
+        params.require(:user).permit([:name, :email, :phone_number, :password, :role_id])
       end
 
       def set_user

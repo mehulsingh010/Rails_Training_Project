@@ -7,3 +7,5 @@
 //= link controllers/hello_controller.js
 
 //= link controllers/index.js
+
+//= link dashboard.css

@@ -9,7 +9,7 @@
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Phone Number</th>
-      <th scope="col">Role ID</th>
+      <th scope="col">Role</th>
       <th scope="col">View </th>
       <th scope="col">Edit </th>
       <th scope="col">DELETE</th>
@@ -26,7 +26,7 @@
         <td><%= user.role.name.humanize %></td>
         <td><%= link_to  user_path(user.id), class: 'btn btn-light' do %>view <% end %> </td>
         <td> <%= link_to edit_user_path(user.id), class: 'btn btn-primary' do  %>edit  <% end %></td>
-        <td> <%= link_to  user_path(user.id),method: :delete, class: 'btn btn-danger' do  %>delete<% end %></td>
+        <td> <%= button_to  user_path(user.id),method: :delete, class: 'btn btn-danger' do  %>delete<% end %></td>
         
       </tr>
     <% end %>
@@ -34,9 +34,7 @@
 </table>
 </div>
 
-<%= link_to new_user_path, class: 'btn btn-info' do %>
-  Add New User
-<% end %>
+
 
 
 <%= link_to turves_path, class: 'btn btn-info' do %>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+    before_action :authenticate_user!
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     # index refer to file in view/users name that is the root of users
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-        # @user = User.find(params[:id])
+        
     end
 
     # post /users creating new users

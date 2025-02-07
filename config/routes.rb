@@ -11,13 +11,34 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  #routes for users
-  resources :users, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+  # routes for users
+  resources :users
+  # post '/auth/login', to: 'authentication#login'
+   resources :reviews
 
-  resources :reviews, only: [:index, :new, :show]
+  resources :bookings, only: [:index, :new , :create, :show]
 
-  resources :turves, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+  resources :turves
+
+
+  # API
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :show, :create]
+      post '/auth/login', to: 'authentication#login'
+
+      resources :turves do
+        resources :time_slots
+      end
+      resources :reviews
+
+     
+    end 
+  end
+
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "users#index"
 end
