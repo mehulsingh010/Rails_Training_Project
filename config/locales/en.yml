@@ -27,5 +27,8 @@
 #       "yes": yup
 #       enabled: "ON"
 
+# en:
+#   hello: "Hello world"
+
 en:
-  hello: "Hello world"
+  test: "This is a test"
