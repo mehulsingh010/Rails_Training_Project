@@ -1,0 +1,23 @@
+<!-- app/views/time_slots/index.html.erb -->
+<h1>Time Slots for <%= @turf.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @time_slots.each do |time_slot| %>
+      <tr>
+        <td><%= time_slot.start_time.strftime('%I:%M %p') %></td>
+        <td><%= time_slot.end_time.strftime('%I:%M %p') %></td>
+        <td><%= time_slot.status.capitalize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Turfs', turfs_path %>
