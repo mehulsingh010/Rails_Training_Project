@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index, :new , :create, :show]
 
   resources :turves
-
+  
 
   # API
 
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :show, :create]
       post '/auth/login', to: 'authentication#login'
+      post '/auth/signup', to: 'authentication#signup'
 
       resources :turves do
         resources :time_slots
