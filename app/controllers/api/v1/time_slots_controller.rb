@@ -2,7 +2,7 @@ class Api::V1::TimeSlotsController < ApplicationController
 
   before_action :set_time_slot, only: [:show, :destroy, :update]
   def index
-    if params[:turf_id]
+    if params[:turf_id].present?
       turf = Turf.find_by_id(params[:turf_id])
       @time_slots = turf ? turf.time_slots : []
       render json: { status: "Success" , timeSlots: {data: @time_slots}}
@@ -10,7 +10,7 @@ class Api::V1::TimeSlotsController < ApplicationController
   end
 
   def show
-    @time_slot = TimeSlot.find(params[:id])
+    render json: {status: "Success",data: @time_slot}
   end
 
   def create 
@@ -18,7 +18,7 @@ class Api::V1::TimeSlotsController < ApplicationController
     if @time_slot.save
       render json: {status: "Success",message: "TimeSlot Created Succesfully",data: @time_slot}
     else
-      render json: {status: "Error",message: "TimeSlot Not Created", error: @time_slot.errors.full_message}
+      render json: {status: "Error",message: "TimeSlot Not Created", error: @time_slot.errors.full_messages}
     end
   end
 
@@ -26,12 +26,16 @@ class Api::V1::TimeSlotsController < ApplicationController
     if  @time_slot.update(time_slot_params)
       render json: {status: "Success", message: "TimeSlots updated successfully",data: @time_slot}
     else 
-      render json: {status: "Error",message: "Errors While Updating the TimeSlot",error: @time_slot.errors.full_message},status: :unprocessable_entity
+      render json: {status: "Error",message: "Errors While Updating the TimeSlot",error: @time_slot.errors.full_messages},status: :unprocessable_entity
     end
   end
 
   def destroy
-    @time_slot.destroy
+    if @time_slot.destroy
+      render json: { status: "Success", message: "TimeSlot Deleted Successfully" }
+    else
+      render json: { status: "Error", message: "Error While Deleting TimeSlot" }, status: :unprocessable_entity
+    end
   end
 
   private 
@@ -42,6 +46,6 @@ class Api::V1::TimeSlotsController < ApplicationController
 
 
   def time_slot_params
-    params.require(:time_slot).permit([:time_slot_id, :start_time,:end_time,:turf_id,:status])
+    params.require(:time_slot).permit([:start_time, :end_time, :turf_id, :status])
   end
 end

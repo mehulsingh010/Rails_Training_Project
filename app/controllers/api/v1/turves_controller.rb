@@ -1,6 +1,6 @@
 class Api::V1::TurvesController < ApplicationController
 
-    before_action :set_turf , only: [:show, :update]
+    before_action :set_turf , only: [:show, :update, :destroy]
 
     def index
         @turves = Turf.all
@@ -31,6 +31,14 @@ class Api::V1::TurvesController < ApplicationController
             render json: {status: "Error",message: "Errors While Updating Turf Details",error: @turf.errors.full_message}, status: :unprcoessable_entity
         end
     end
+
+    def destroy
+        if @turf.destroy
+            render json: {status: "Success", message: "Turf Deleted Successfully",data: @turf}
+        else
+            render json:{status: "Error",message: "Error In Deleting Turf",errors: @turf.errors.full_messages}
+        end
+    end
             
     def set_turf
         @turf = Turf.find(params[:id])
@@ -38,6 +46,6 @@ class Api::V1::TurvesController < ApplicationController
 
     def turf_params
         # debugger
-      params.require(:turf).permit([:name ,:location ,:opening_time, :close_time, :status, :user_id])
+      params.require(:turf).permit([:name ,:location ,:opening_time, :close_time, :status ,:user_id])
     end
 end
