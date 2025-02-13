@@ -1,0 +1,16 @@
+<h1>Create Review</h1>
+
+<div style="display: grid; justify-items: center; align-items: center;">
+  <%= form_with model: @review, method: :post do |user_form| %>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :Review, class: "form-label" %>
+      <%= user_form.text_field :review, class: "form-control" %>
+    </div>    
+
+
+    <%= user_form.submit "Create Review", class: "btn btn-primary" %>
+  <% end %>  
+</div>
+
+<link_to 

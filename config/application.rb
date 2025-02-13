@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module TurfBookingPV1
   class Application < Rails::Application
+
+    config.api_only = false
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
@@ -23,5 +26,9 @@ module TurfBookingPV1
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    I18n.load_path += Dir[File.expand_path("config/locales") + "/*.yml"]
+
+    I18n.default_locale = :en # (note that `en` is already the default!)
   end
 end

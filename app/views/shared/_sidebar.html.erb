@@ -1,0 +1,116 @@
+<!-- Sidebar -->
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        
+        <!-- Sidebar Header -->
+        <%= link_to root_path, class: "d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none" do %>
+          <span class="fs-5 d-none d-sm-inline">Menu</span>
+        <% end %>
+
+        <!-- Navigation -->
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+        <i class="bi bi-people-fill"></i>
+        
+        <li class="nav-item">
+        <%= link_to root_path, class: "nav-link align-middle px-0 text-white d-flex align-items-center" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill me-2" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+          </svg>
+          Users
+        <% end %>
+      </li>
+      
+          <li class="nav-item">
+          <%= link_to turves_path, class: "nav-link align-middle px-0 text-white d-flex align-items-center" do%>
+          Turves
+          <% end %>
+          </li>
+          
+          <!--
+          <li>
+            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+              <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+            </a>
+            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+              <li class="w-100">
+                <%= link_to "", "#", class: "nav-link px-0 text-white" %>
+              </li>
+              <li>
+                <%= link_to "Item 2", "#", class: "nav-link px-0 text-white" %>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <%= link_to "Orders", "#", class: "nav-link px-0 align-middle text-white" %>
+          </li>
+
+          <li>
+            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+              <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+              <li class="w-100">
+                <%= link_to "Item 1", "#", class: "nav-link px-0 text-white" %>
+              </li>
+              <li>
+                <%= link_to "Item 2", "#", class: "nav-link px-0 text-white" %>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+              <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+              <li class="w-100">
+                <%= link_to "Product 1", "#", class: "nav-link px-0 text-white" %>
+              </li>
+              <li>
+                <%= link_to "Product 2", "#", class: "nav-link px-0 text-white" %>
+              </li>
+              <li>
+                <%= link_to "Product 3", "#", class: "nav-link px-0 text-white" %>
+              </li>
+              <li>
+                <%= link_to "Product 4", "#", class: "nav-link px-0 text-white" %>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <%= link_to "Customers", "#", class: "nav-link px-0 align-middle text-white" %>
+          </li>
+        </ul>
+        -->
+        <hr>
+
+        <!-- User Dropdown -->
+        <div class="dropdown pb-4">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag "https://github.com/mdo.png", width: 30, height: 30, class: "rounded-circle" %>
+            <span class="d-none d-sm-inline mx-1">User</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <li><%= link_to "New project...", "#", class: "dropdown-item" %></li>
+            <li><%= link_to "Settings", "#", class: "dropdown-item" %></li>
+            <li><%= link_to "Profile", "#", class: "dropdown-item" %></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col py-3"> 
+      <%= yield %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<h1> Edit Turf Details </h1>
+
+<%= form_with model: @turf, method: :put do |f| %>
+
+    <div class="form-group mb-3">
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :location, class: "form-label" %>
+      <%= f.text_field :location %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :opening_time, class: "form-label" %>
+      <%= f.time_field :opening_time %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :close_time, class: "form-label" %>
+      <%= f.time_field :close_time %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :status ,class: "form-label"%>
+      <%= f.check_box :status, class: "form-check-input" %> 
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :user_id, "Assign User",class: "form-label" %>
+      <%= f.select :user_id, User.all.map { |u| [u.name, u.id] }, { include_blank: "Select a User" }, class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= f.label :time_slot_id, "Time Slots",class: "form-label" %>
+      <%= f.select :time_slot_id, TimeSlot.all.map { |ts| [ts.start_time, ts.end_time] }, { include_blank: "Select a time" }, class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+    <%= f.submit "submit",class: "btn btn-success" %> 
+    </div>
+<% end %>
+
+<!-- app/views/time_slots/index.html.erb -->
+<h1>Time Slots for <%= @turf.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @turf.time_slots.each do |time_slot| %>
+      <tr>
+        <td><%= time_slot.start_time.strftime('%I:%M %p') %></td>
+        <td><%= time_slot.end_time.strftime('%I:%M %p') %></td>
+        <td><%= time_slot.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Turfs', turves_path %>

@@ -17,6 +17,24 @@ Rails.application.configure do
   # Enable server timing.
   config.server_timing = true
 
+
+# config.action_mailer.delivery_method = :sendmail
+# config.action_mailer.perform_deliveries = true
+# config.action_mailer.raise_delivery_errors = true
+# config.action_mailer.default_options = {from: 'mehul.singh@joshsoftware.com'}
+# config.action_mailer.delivery_method = :smtp
+# config.action_mailer.smtp_settings = {
+# address:              'smtp.gmail.com',
+# port:                 587,
+# domain:               'joshsoftware.com', # Domain (should match sender email)
+# user_name:            Rails.application.credentials.gmail[:email],
+# password:            Rails.application.credentials.gmail[:password],
+# authentication:       'plain',
+# enable_starttls_auto: true  }
+
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
@@ -41,7 +59,6 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

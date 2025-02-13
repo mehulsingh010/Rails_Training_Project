@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get "home/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,9 +11,35 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  #routes for users
-  resources :users, only: [:index, :show, :create]
+  # routes for users
+  resources :users
+  # post '/auth/login', to: 'authentication#login'
+   resources :reviews
+
+  resources :bookings, only: [:index, :new , :create, :show]
+
+  resources :turves
+  
+
+  # API
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :show, :create]
+      post '/auth/login', to: 'authentication#login'
+      post '/auth/signup', to: 'authentication#signup'
+
+      resources :turves do
+        resources :time_slots
+      end
+      resources :reviews
+
+     
+    end 
+  end
+
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "users#index"
 end

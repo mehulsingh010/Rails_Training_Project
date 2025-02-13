@@ -1,0 +1,40 @@
+<h1>Create User</h1>
+
+<div style="display: grid; justify-items: center; align-items: center;">
+  <%= form_with model: @user do |user_form| %>
+
+   
+
+    <div class="form-group mb-3">
+      <%= user_form.label :name, class: "form-label" %>
+      <%= user_form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :email %>
+      <%= user_form.email_field :email, class: "form-control", placeholder: "Enter email" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :password %>
+      <%= user_form.password_field :password, class: "form-control", placeholder: "Enter password" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :password_confirmation %>
+      <%= user_form.password_field :password_confirmation, class: "form-control", placeholder: "Enter password" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :phone_number %>
+      <%= user_form.telephone_field :phone_number, class: "form-control", placeholder: "Enter phone number" %>
+    </div>
+
+    <div class="form-group mb-3">
+      <%= user_form.label :User_type %>
+      <%= user_form.select :role_id, [["user", 1], ["owner", 2]], class: "form-select" %>
+    </div>
+
+    <%= user_form.submit "Create User", class: "btn btn-primary" %>
+  <% end %>  
+</div>
